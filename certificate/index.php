@@ -84,6 +84,6 @@ $writer->setOrientation(PageSetup::ORIENTATION_LANDSCAPE);
 
 
 
-$writer->save('hello_world.pdf');
+$writer->save(time().'_hello_world.pdf');
 
 echo $OUTPUT->footer();

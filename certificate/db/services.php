@@ -27,9 +27,9 @@ defined('MOODLE_INTERNAL') || die;
 
 $functions = [
 
-    'local_certificate_get_quizzes_by_courses' => [
-        'classname'     => 'mod_quiz_external',
-        'methodname'    => 'get_quizzes_by_courses',
+    'local_certificate_view_quiz' => [
+        'classname'     => 'local_certificate_external',
+        'methodname'    => 'view_quiz',
         'description'   => 'Returns a list of quizzes in a provided list of courses,
                             if no list is provided all quizzes that the user can view will be returned.',
         'type'          => 'read',

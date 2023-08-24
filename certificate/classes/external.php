@@ -51,10 +51,10 @@ class local_certificate_external extends external_api {
      * @return external_function_parameters
      * @since Moodle 4.1
      */
-    public static function view_quiz_parameters() {
+    public static function view_pdf_parameters() {
         return new external_function_parameters (
             [
-                'quizid' => new external_value(PARAM_INT, 'quiz instance id'),
+                'pdfid' => new external_value(PARAM_INT, 'pdf instance id'),
             ]
         );
     }
@@ -62,11 +62,11 @@ class local_certificate_external extends external_api {
     /**
      * Trigger the course module viewed event and update the module completion status.
      *
-     * @param int $quizid quiz instance id
+     * @param int $pdfid instance id
      * @return array of warnings and status result
      * @since Moodle 4.1
      */
-    public static function view_quiz($quizid) {
+    public static function view_pdf($pdfid) {
         global $DB;
 
         
@@ -84,7 +84,7 @@ class local_certificate_external extends external_api {
      * @return external_single_structure
      * @since Moodle 4.1
      */
-    public static function view_quiz_returns() {
+    public static function view_pdf_returns() {
         return new external_single_structure(
             [
                 'status' => new external_value(PARAM_BOOL, 'status: true if success'),

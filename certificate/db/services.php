@@ -27,13 +27,12 @@ defined('MOODLE_INTERNAL') || die;
 
 $functions = [
 
-    'local_certificate_view_quiz' => [
+    'local_certificate_view_pdf' => [
         'classname'     => 'local_certificate_external',
-        'methodname'    => 'view_quiz',
-        'description'   => 'Returns a list of quizzes in a provided list of courses,
-                            if no list is provided all quizzes that the user can view will be returned.',
+        'methodname'    => 'view_pd',
+        'description'   => 'Returns the PDF',
         'type'          => 'read',
-        'capabilities'  => 'mod/quiz:view',
+        'capabilities'  => 'local/certificate:view',
         'services'      => [MOODLE_OFFICIAL_MOBILE_SERVICE]
     ],
 

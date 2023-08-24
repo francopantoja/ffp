@@ -24,7 +24,7 @@
  */
 
 require(__DIR__.'/../../config.php');
-require_once($CFG->libdir.'/adminlib.php');
+//require_once($CFG->libdir.'/adminlib.php');
 
 use local_certificate\mymetadata as metadatainfo;
 
@@ -50,15 +50,40 @@ $username = metadatainfo::get_username($USER->id);
 echo $username;
 
 require_once($CFG->libdir . '/phpspreadsheet/vendor/autoload.php');
+require_once('../../vendor/autoload.php');
 
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
-use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
+use PhpOffice\PhpSpreadsheet\Writer\Pdf\Mpdf;
+use PhpOffice\PhpSpreadsheet\Worksheet\PageSetup;
+
 
 $spreadsheet = new Spreadsheet();
+$spreadsheet->getProperties()
+->setCreator($username)
+    ->setLastModifiedBy("Alberto Marín")
+    ->setTitle("Documento creado por Albertiño")
+    ->setSubject("Documento en PDF")
+    ->setDescription(
+        "Documento de prueba con fines didacticos."
+    )
+    ->setKeywords("pdf 2023 mpdf php")
+    ->setCategory("Resultado del archivo");
+    
 $sheet = $spreadsheet->getActiveSheet();
 
-$sheet->setCellValue('A1', 'Hello World !');
-$writer = new Xlsx($spreadsheet);
-$writer->save('hello world.xlsx');
+$sheet->setCellValue('A1', 'Manolo el chocolatero!');
+
+
+$writer = new Mpdf($spreadsheet);
+
+$writer->writeAllSheets();
+$writer->setOrientation(PageSetup::ORIENTATION_LANDSCAPE);
+
+
+
+
+
+
+$writer->save('hello_world.pdf');
 
 echo $OUTPUT->footer();

@@ -42,3 +42,33 @@ PARTICULAR PURPOSE.  See the GNU General Public License for more details.
 
 You should have received a copy of the GNU General Public License along with
 this program.  If not, see <https://www.gnu.org/licenses/>.
+
+## API REST ##
+Desarrollo de la funcionalidad “Webservices para obtener el certificado“ dentro del plugin local_certificate
+https://github.com/UNIMOODLE/moodle-local_certificate-P31
+El sistema ofrecerá diferentes servicios web para obtener certificados desde sistemas externos. Estos servicios web serán los siguientes:
+1.	getPdfTeaching (id-modelo, dni, course)
+Devuelve el PDF del certificado de que el profesor ha impartido docencia en el curso indicado con el detalle del uso que ha realizado de la herramienta que aparecerá en el certificado. Este servicio web llamará a getJsonTeaching para obtener la información a maquetar.
+2.	getJsonTeaching (dni, course)
+Devuelve un json con la información necesaria para el anterior servicio para confeccionar el certificado. El objetivo de este servicio es independizar el proceso de obtención de los datos del proceso de generación del documento con la presentación final.
+3.	getPdfStudentCourseCompleted (id-modelo, dni, course)
+Devuelve el PDF del certificado de que el alumno ha cursado y superado el curso indicado en el parámetro. Este servicio web llamará a getJsonStudentCourseCompleted para obtener la información a maquetar.
+4.	getJsonStudentCourseCompleted (dni, course)
+Devuelve un json con la información necesaria para el anterior servicio para confeccionar el certificado. El objetivo de este servicio es independizar el proceso de obtención de los datos del proceso de generación del documento con la presentación final.
+5.	getCoursesAsStudent (dni)
+Devuelve un json con la lista de los cursos a los cuales ha asistido el alumno. Este servicio permitirá a un sistema externo mostrar los cursos certificables para que seleccionen uno para generar su certificado. El servicio devolverá como mínimo los siguientes atributos de cada curso y se valorará que se ofrezca un servicio para configurar otros atributos de los disponibles para el alumno y los cursos en Moodle:
+a. course.shortname
+b. course.fullname
+c. course.categoryid.
+d. course.completed booleano indicando si el curso ha sido superado por el alumno.
+e. Lista de modelos que pueden usarse para emitir el certificado para cada curso. El servicio también devolverá los atributos del alumno:student.fullname
+6.	getCoursesAsTeacher (dni)
+Devuelve un json con la lista de cursos en los cuales figura como profesor la persona indicada por su dni. Este servicio permitirá a un sistema externo mostrar los cursos certificables para que seleccionen uno para generar su certificado. El servicio devolverá como mínimo los siguientes atributos de cada curso y se valorará que se ofrezca un servicio para configurar otros atributos de los disponibles para el profesor y los cursos en moodle:
+a. course.shortname
+b. course.fullname
+c. course.categoryid.
+d. course.completed booleano indicando si el curso ha sido superado por el alumno.
+e. Lista de modelos que pueden usarse para emitir el certificado para cada curso. El servicio también devolverá los atributos del alumno:teacher.fullname
+
+El parámetro “Course” de pdfTeaching y jsonTeaching debe ser un multivaluado (array de uno o más) de courseid. Por coherencia con la especificación del report. Si el array es vacío se entiende todo el servidor.
+

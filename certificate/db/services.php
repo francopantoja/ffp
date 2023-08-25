@@ -29,7 +29,7 @@ $functions = [
 
     'local_certificate_view_pdf' => [  // local_PLUGINNAME_FUNCTIONNAME is the name of the web service function that the client will call.
         'classname'     => 'local_certificate_external',  // create this class in componentdir/classes/external
-        'methodname'    => 'view_pd',  // implement this function into the above class
+        'methodname'    => 'view_pdf',  // implement this function into the above class
         'description'   => 'This documentation will be displayed in the generated API documentation               (Administration > Plugins > Webservices > API documentation)',
         'type'          => 'read', // the value is 'write' if your function does any database change, otherwise it is 'read'.
         'capabilities'  => 'local/certificate:view',
